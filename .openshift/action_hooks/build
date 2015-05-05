@@ -9,7 +9,7 @@ exec 2>&1 # Also log stderr
 #Log the commands as well
 set -v
 
-=
+
 cd $ROOT
 
 wget http://dist.sonar.codehaus.org/sonarqube-$SONAR_VERSION.zip
@@ -30,10 +30,10 @@ sed -i "s/^#sonar.web.port.*$/sonar.web.port=$OPENSHIFT_DIY_PORT/" sonar.propert
 #echo -e "\nwrapper.debug=TRUE" >> ${OPENSHIFT_DATA_DIR}sonarqube/conf/wrapper.conf
 
 
-  sed -i "s/^#sonar.jdbc.username.*$/sonar.jdbc.username=$OPENSHIFT_MYSQL_DB_USERNAME/" sonar.properties
-  sed -i "s/^#sonar.jdbc.password.*$/sonar.jdbc.password=$OPENSHIFT_MYSQL_DB_PASSWORD/" sonar.properties
-  sed -i 's/^sonar.jdbc.url/#sonar.jdbc.url/' sonar.properties
-  sed -i "s;^.*sonar.jdbc.url=jdbc:mysql.*$;sonar.jdbc.url=jdbc:mysql://$MYSQL_URL?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance;" sonar.properties
+sed -i "s/^#sonar.jdbc.username.*$/sonar.jdbc.username=$OPENSHIFT_MYSQL_DB_USERNAME/" sonar.properties
+sed -i "s/^#sonar.jdbc.password.*$/sonar.jdbc.password=$OPENSHIFT_MYSQL_DB_PASSWORD/" sonar.properties
+#sed -i 's/^sonar.jdbc.url/#sonar.jdbc.url/' sonar.properties
+sed -i "s/^#sonar.jdbc.url=jdbc:mysql.*$/sonar.jdbc.url=jdbc:mysql://$MYSQL_URL?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance/" sonar.properties
 
 sed -i "s/^#sonar.web.javaOpts.*$/sonar.web.javaOpts=-Xmx256m -XX:MaxPermSize=80m -XX:+HeapDumpOnOutOfMemoryError -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djruby.management.enabled=false/" sonar.properties 
 
@@ -51,7 +51,7 @@ sed -i "s/^#sonar.search.javaOpts=.*$/sonar.search.javaOpts=-Xmx256m -Xms256m -X
 #sed -i "s/^#sonar.search.host=.*$/sonar.search.host=$OPENSHIFT_DIY_IP/" sonar.properties
 
 
-echo 'network.bind_host=$OPENSHIFT_DIY_IP' >> sonar.properties
+echo -e "\nnetwork.bind_host=${OPENSHIFT_DIY_IP}" >> sonar.properties
 
 cd $OPENSHIFT_DATA_DIR
 rm -rf logs
