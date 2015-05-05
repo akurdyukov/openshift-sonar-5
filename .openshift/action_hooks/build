@@ -49,6 +49,10 @@ sed -i "s/^#sonar.search.javaOpts=.*$/sonar.search.javaOpts=-Xmx256m -Xms256m -X
 
 # TODO We really could use a sonar.search.host property here, that changed the search client url
 #sed -i "s/^#sonar.search.host=.*$/sonar.search.host=$OPENSHIFT_DIY_IP/" sonar.properties
+
+
+echo 'network.bind_host=$OPENSHIFT_DIY_IP' >> sonar.properties
+
 cd $OPENSHIFT_DATA_DIR
 rm -rf logs
 ln -s $OPENSHIFT_LOG_DIR logs
