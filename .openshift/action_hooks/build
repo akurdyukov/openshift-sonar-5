@@ -33,7 +33,7 @@ sed -i "s/^#sonar.web.port.*$/sonar.web.port=$OPENSHIFT_DIY_PORT/" sonar.propert
 sed -i "s/^#sonar.jdbc.username.*$/sonar.jdbc.username=$OPENSHIFT_MYSQL_DB_USERNAME/" sonar.properties
 sed -i "s/^#sonar.jdbc.password.*$/sonar.jdbc.password=$OPENSHIFT_MYSQL_DB_PASSWORD/" sonar.properties
 #sed -i 's/^sonar.jdbc.url/#sonar.jdbc.url/' sonar.properties
-sed -i "s/^#sonar.jdbc.url=jdbc:mysql.*$/sonar.jdbc.url=jdbc:mysql://$MYSQL_URL?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance/" sonar.properties
+sed -i "s/^#sonar.jdbc.url=jdbc:mysql:.*$/sonar.jdbc.url=jdbc:mysql://$MYSQL_URL?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance/" sonar.properties
 
 sed -i "s/^#sonar.web.javaOpts.*$/sonar.web.javaOpts=-Xmx256m -XX:MaxPermSize=80m -XX:+HeapDumpOnOutOfMemoryError -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djruby.management.enabled=false/" sonar.properties 
 
