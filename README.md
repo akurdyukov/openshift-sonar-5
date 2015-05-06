@@ -1,0 +1,1 @@
+# openshift-sonar-5
